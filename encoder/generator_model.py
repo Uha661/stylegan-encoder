@@ -29,7 +29,8 @@ class Generator:
         self.sess = tf.get_default_session()
         self.graph = tf.get_default_graph()
         try:
-            self.dlatent_variable = next(v for v in tf.global_variables() if 'learnable_dlatents' in v.name)
+            while True:
+                self.dlatent_variable = next(v for v in tf.global_variables() if 'learnable_dlatents' in v.name)
         except StopIteration:
             pass
         self.set_dlatents(self.initial_dlatents)
