@@ -18,7 +18,7 @@ def create_variable_for_generator(name, batch_size):
 class Generator:
     def __init__(self, model, batch_size, randomize_noise=False):
         self.batch_size = batch_size
-
+        tf.reset_default_graph() 
         self.initial_dlatents = np.zeros((self.batch_size, 18, 512))
         model.components.synthesis.run(self.initial_dlatents,
                                        randomize_noise=randomize_noise, minibatch_size=self.batch_size,
@@ -39,7 +39,7 @@ class Generator:
         #new
         #self.varname = (create_variable_for_generator, batch_size=batch_size)
         #self.varnameex = self.varname.name
-        tf.reset_default_graph() 
+        
         self.generator_output = self.graph.get_tensor_by_name('learnable_dlatents:0')
         #new
         self.generated_image = tflib.convert_images_to_uint8(self.generator_output, nchw_to_nhwc=True, uint8_cast=False)
