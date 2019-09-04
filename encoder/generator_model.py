@@ -30,9 +30,11 @@ class Generator:
         self.graph = tf.get_default_graph()
         
         self.dlatent_variable = next((v for v in tf.global_variables() if 'learnable_dlatents' in v.name),1)
-        print(self.dlatent_variable)
-        print("--------------")
-        print(self.dlatent_variable.name)
+        #print(self.dlatent_variable)
+        #print("--------------")
+        #print(self.dlatent_variable.name)
+        for op in graph.get_operations():
+            print(op)
         self.set_dlatents(self.initial_dlatents)
         #new
         #self.varname = (create_variable_for_generator, batch_size=batch_size)
