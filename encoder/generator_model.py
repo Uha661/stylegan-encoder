@@ -25,7 +25,8 @@ class Generator:
                                        custom_inputs=[partial(create_variable_for_generator, batch_size=batch_size),
                                                       partial(create_stub, batch_size=batch_size)],
                                        structure='fixed')
-
+        for op in graph.get_operations():
+            print(op)
         self.sess = tf.get_default_session()
         self.graph = tf.get_default_graph()
         
@@ -33,14 +34,13 @@ class Generator:
         #print(self.dlatent_variable)
         #print("--------------")
         #print(self.dlatent_variable.name)
-        for op in graph.get_operations():
-            print(op)
+        
         self.set_dlatents(self.initial_dlatents)
         #new
         #self.varname = (create_variable_for_generator, batch_size=batch_size)
         #self.varnameex = self.varname.name
         
-        self.generator_output = self.graph.get_tensor_by_name('learnable_dlatents:0')
+        self.generator_output = self.graph.get_tensor_by_name('G_synthesis_1/_Run/concat:0')
         #new
         self.generated_image = tflib.convert_images_to_uint8(self.generator_output, nchw_to_nhwc=True, uint8_cast=False)
         self.generated_image_uint8 = tf.saturate_cast(self.generated_image, tf.uint8)
