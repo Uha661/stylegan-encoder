@@ -25,11 +25,11 @@ class Generator:
                                        custom_inputs=[partial(create_variable_for_generator, batch_size=batch_size),
                                                       partial(create_stub, batch_size=batch_size)],
                                        structure='fixed')
-        for op in graph.get_operations():
-            print(op)
+        
         self.sess = tf.get_default_session()
         self.graph = tf.get_default_graph()
-        
+        for op in self.graph.get_operations():
+            print(op)
         self.dlatent_variable = next((v for v in tf.global_variables() if 'learnable_dlatents' in v.name),1)
         #print(self.dlatent_variable)
         #print("--------------")
