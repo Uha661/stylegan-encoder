@@ -23,8 +23,7 @@ class Generator:
         model.components.synthesis.run(self.initial_dlatents,
                                        randomize_noise=randomize_noise, minibatch_size=self.batch_size,
                                        custom_inputs=[partial(create_variable_for_generator, batch_size=batch_size),
-                                                      partial(create_stub, batch_size=batch_size)],
-                                       structure='fixed')
+                                                      partial(create_stub, batch_size=batch_size)])
         for op in graph.get_operations():
             print(op)
         self.sess = tf.get_default_session()
