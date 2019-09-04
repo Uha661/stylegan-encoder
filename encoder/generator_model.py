@@ -39,7 +39,8 @@ class Generator:
         #new
         #self.varname = (create_variable_for_generator, batch_size=batch_size)
         #self.varnameex = self.varname.name
-        self.generator_output = self.graph.get_tensor_by_name('G_synthesis_1/_Run/concat:0')
+        tf.reset_default_graph() 
+        self.generator_output = self.graph.get_tensor_by_name('learnable_dlatents:0')
         #new
         self.generated_image = tflib.convert_images_to_uint8(self.generator_output, nchw_to_nhwc=True, uint8_cast=False)
         self.generated_image_uint8 = tf.saturate_cast(self.generated_image, tf.uint8)
