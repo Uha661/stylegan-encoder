@@ -10,7 +10,7 @@ def create_stub(name, batch_size):
 
 def create_variable_for_generator(name, batch_size):
     return tf.tile(tf.expand_dims(tf.get_variable('learnable_dlatents',
-                           shape=(batch_size, 1, 512),
+                           shape=(batch_size, 512),
                            dtype='float32',
                            initializer=tf.initializers.random_normal()), axis=1), [1, 18, 1])
 
