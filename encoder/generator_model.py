@@ -28,7 +28,7 @@ class Generator:
                                        structure='fixed')'''
         model.components.synthesis.run(np.zeros((self.batch_size, 18, 512)),
 				randomize_noise=randomize_noise, minibatch_size=self.batch_size,
-				custom_inputs=[partial(create_variable_for_generator, batch_size=batch_size, tiled_dlatent=True),
+				custom_inputs=[partial(create_variable_for_generator, batch_size=batch_size),
 												partial(create_stub, batch_size=batch_size)],
 				structure='fixed')
         
