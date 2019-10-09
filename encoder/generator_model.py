@@ -28,8 +28,8 @@ class Generator:
         
         self.sess = tf.get_default_session()
         self.graph = tf.get_default_graph()
-        #for op in self.graph.get_operations():
-            #print(op)
+        for op in self.graph.get_operations():
+            print(op)
         self.dlatent_variable = next((v for v in tf.global_variables() if 'learnable_dlatents' in v.name),1)
         #print(self.dlatent_variable)
         #print("--------------")
