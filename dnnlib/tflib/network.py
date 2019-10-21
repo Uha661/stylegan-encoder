@@ -86,6 +86,7 @@ class Network:
         if util.is_top_level_function(func_name):
             func_name = util.get_top_level_function_name(func_name)
         module, self._build_func_name = util.get_module_from_obj_name(func_name)
+        print(module)
         self._build_func = util.get_obj_from_module(module, self._build_func_name)
         assert callable(self._build_func)
 
