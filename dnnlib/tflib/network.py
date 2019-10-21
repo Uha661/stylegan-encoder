@@ -210,7 +210,7 @@ class Network:
         build_kwargs["components"] = self.components
 
         # Build TensorFlow graph to evaluate the network.
-        with tfutil.absolute_variable_scope(self.scope, reuse=tf.AUTO_REUSE), tf.name_scope(self.name):
+        with tfutil.absolute_variable_scope(self.scope, reuse=True), tf.name_scope(self.name):
             assert tf.get_variable_scope().name == self.scope
             valid_inputs = [expr for expr in in_expr if expr is not None]
             final_inputs = []
@@ -220,6 +220,7 @@ class Network:
                 else:
                     expr = tf.zeros([tf.shape(valid_inputs[0])[0]] + shape[1:], name=name)
                 final_inputs.append(expr)
+            print(final_inputs)
             out_expr = self._build_func(*final_inputs, **build_kwargs)
 
         # Propagate input shapes back to the user-specified expressions.
