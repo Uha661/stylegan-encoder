@@ -222,6 +222,7 @@ class Network:
                     expr = tf.zeros([tf.shape(valid_inputs[0])[0]] + shape[1:], name=name)
                 final_inputs.append(expr)
             print(final_inputs)
+            print(build_kwargs)
             out_expr = self._build_func(*final_inputs, **build_kwargs)
 
         # Propagate input shapes back to the user-specified expressions.
