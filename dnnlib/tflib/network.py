@@ -86,7 +86,7 @@ class Network:
         if util.is_top_level_function(func_name):
             func_name = util.get_top_level_function_name(func_name)
         module, self._build_func_name = util.get_module_from_obj_name(func_name)
-        print(module)
+        #print(module)
         self._build_func = util.get_obj_from_module(module, self._build_func_name)
         assert callable(self._build_func)
 
@@ -214,15 +214,15 @@ class Network:
             assert tf.get_variable_scope().name == self.scope
             valid_inputs = [expr for expr in in_expr if expr is not None]
             final_inputs = []
-            print(self.input_names)
+            #print(self.input_names)
             for expr, name, shape in zip(in_expr, self.input_names, self.input_shapes):
                 if expr is not None:
                     expr = tf.identity(expr, name=name)
                 else:
                     expr = tf.zeros([tf.shape(valid_inputs[0])[0]] + shape[1:], name=name)
                 final_inputs.append(expr)
-            print(final_inputs)
-            print(build_kwargs)
+            #print(final_inputs)
+            #print(build_kwargs)
             out_expr = self._build_func(*final_inputs, **build_kwargs)
 
         # Propagate input shapes back to the user-specified expressions.
